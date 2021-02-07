@@ -1,0 +1,6 @@
+
+DATABASE FIELD                      FORM 4 
+reporting-owner-name                rptOwnerName
+reporting_owner_relationship_id     reportingOwnerRelationship
+title                               officerTitle
+

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+from security import Security
 
 class SecurityDAO:
 
@@ -13,3 +13,13 @@ class SecurityDAO:
         
         cur.execute(sql, [symbol, description, description])
         conn.commit()
+
+    def get_all(self):
+        cur = self.database.conn.cursor()
+        cur.execute("SELECT symbol, description FROM security;")
+        
+        fetch_securities = cur.fetchall()
+        securities = []
+        for fetch_security in fetch_securities:
+            securities.append(Security(fetch_security[0], fetch_security[1]))
+        return securities

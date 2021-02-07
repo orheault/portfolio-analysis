@@ -4,14 +4,11 @@
 # ftp://ftp.nasdaqtrader.com/symboldirectory/otherlisted.txt
 
 from ftplib import FTP
-from security_dao import SecurityDAO
-from database import Database
 from security_formatter import SecurityFormatter
 
 class SecurityUpdater:
-    def __init__(self):
-        database = Database()
-        self.securityDAO = SecurityDAO(database)
+    def __init__(self, securityDAO):
+        self.securityDAO = securityDAO
         self.securityFormatter = SecurityFormatter()
 
     def __download_file_content(self, url):
