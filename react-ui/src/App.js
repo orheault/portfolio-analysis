@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import { Container, Icon, Menu, Sidebar } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css'
 import './App.css';
 
+import { SideMenuVertical } from './components/SideMenuVertical'
+import { TopMenu } from './components/TopMenu';
+import { Main } from "./components/Main";
+import { useState } from 'react';
+
 function App() {
+
+  const [toggle, setToggle] = useState(false);
+
+  function toggleMenu() {
+    setToggle(!toggle);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <TopMenu onToggleMenu={toggleMenu} />
+      <div className="ui attached pushable"
+        style={{ height: '100vh' }}>
+        <SideMenuVertical toggleMenu={toggle} />
+        <div className="pusher bottom">
+          <Main />
+        </div>
+      </div>
     </div>
   );
 }
