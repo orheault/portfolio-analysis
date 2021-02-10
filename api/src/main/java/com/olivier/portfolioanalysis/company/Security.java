@@ -1,10 +1,18 @@
 package com.olivier.portfolioanalysis.company;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Security")
 public class Security {
+    @Id
+    @Column(name = "symbol")
     private String symbol;
+
+    @Column(name = "description")
     private String description;
 
     public Security() {
@@ -15,7 +23,6 @@ public class Security {
         this.description = description;
     }
 
-    @javax.persistence.Id
     public String getSymbol() {
         return symbol;
     }
