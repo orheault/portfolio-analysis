@@ -3,6 +3,24 @@ import React, {useState} from 'react'
 
 export const SearchTicker = () => {
     const [state, setState] = useState({isLoading: false, results: [{ title: '', description: '' }], value: '' });
+    const { isLoading, value, results } = state
+
+
+    /** DETECT INPUT KEYBOARD AND FOCUS SEARCH BAR. ALLOWS TO SEARCH TICKER WITHOUT HAVING TO FOCUS ON THE SEARCH
+     *  BAR **/
+    const searchInputRef = React.useCallback(node => {
+        if(node != null){
+            document.addEventListener('keypress', event => {
+                if(!node.focused){
+                    node.focus();
+                    node.value = node.value + event.key;
+                }
+            })
+        }
+    }, []);
+
+
+
 
     const handleResultSelect = (e, { result }) => {
         setState({ value: result.title })
@@ -36,17 +54,15 @@ export const SearchTicker = () => {
             .catch(console.log)
     });
 
-    const { isLoading, value, results } = state
-
     return (
-
         <Search
-          onSearchChange={handleSearchChange}
-          onResultSelect={handleResultSelect}
-          type='text'
-          loading={isLoading}
-          results={results}
-          value={value}
+            input={{ref: searchInputRef}}
+            onSearchChange={handleSearchChange}
+            onResultSelect={handleResultSelect}
+            type='text'
+            loading={isLoading}
+            results={results}
+            value={value}
         />
     )
 }
