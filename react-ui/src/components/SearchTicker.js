@@ -64,6 +64,7 @@ export const SearchTicker = (props) => {
                 loading={isLoading}
                 results={results}
                 value={value}
+                placeholder={"Search.."}
             />
         </div>
     )

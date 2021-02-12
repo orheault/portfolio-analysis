@@ -61,8 +61,11 @@
 
 .menu-item {
     display: block;
-    padding: .225rem 1rem;
     position: relative;
     font-size: 13px;
     transition: all .4s;
+}
+
+.search .input input {
+    background-color: #f3f3f9;
 }
