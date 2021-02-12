@@ -1,19 +1,13 @@
-import { Menu } from "semantic-ui-react"
+import {Icon, Menu} from "semantic-ui-react"
 import { SearchTicker } from "./SearchTicker"
 
 export const TopMenu = (props) => {
-    const onToggleMenu = () => {
-        console.log("menu toggle")
-    }
-    
     return (
-        <div className="ui top inverted attached menu">
-            <span className="item link grey"
-                onClick={props.onToggleMenu}>Menu</span>
-
-                <Menu.Menu position='right'>
-                    <SearchTicker />
-               </Menu.Menu>
+        <div className="ui top attached menu borderless">
+            <div className="item" onClick={props.onToggleMenu}>
+                <Icon name='sidebar' size='large' className='link' />
+            </div>
+            <SearchTicker className='item' />
         </div>
     )
 }
