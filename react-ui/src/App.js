@@ -14,7 +14,7 @@ import { NotFoundPage } from './pages/404';
 
 function App() {
 
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState(true);
 
   function toggleMenu() {
     setToggle(!toggle);
@@ -23,12 +23,14 @@ function App() {
   return (
     <div>
       <TopMenu onToggleMenu={toggleMenu} />
-      <div className="ui attached pushable"
+
+      <div className="ui attached pushable blend-white"
         style={{ height: '100vh' }}>
+
+
         <Router>
           <SideMenuVertical toggleMenu={toggle} />
           <div className="pusher bottom">
-
             <Switch>
               <Route exact path="/" component={MainPage} />
               <Route exact path="/404" component={NotFoundPage} />
