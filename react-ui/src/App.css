@@ -37,6 +37,9 @@
   }
 } */
 
+#root {
+    height: 100%
+}
 .blend-white {
     background-color: #eff2f7;
 }
