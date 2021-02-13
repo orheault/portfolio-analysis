@@ -69,3 +69,30 @@
 .search .input input {
     background-color: #f3f3f9;
 }
+
+
+/*TOP BAR*/
+.button.symbol-button {
+    margin-left: 30px;
+    border-style: solid;
+    border-width: thin;
+    border-color: #556ee6;
+    color: #556ee6;
+    background-color: #eff2f7;
+}
+
+.button.symbol-button:hover{
+    background-color: #556ee6;
+    color: white;
+}
+
+
+.button.symbol-button:focus{
+    background-color: #556ee6;
+    color: white;
+}
+
+.active .button.symbol-button{
+    background-color: #556ee6;
+    color: white;
+}

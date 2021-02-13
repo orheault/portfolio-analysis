@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Link, NavLink} from 'react-router-dom';
 
 export const SideMenuVertical = (props) => {
 
@@ -8,18 +8,18 @@ export const SideMenuVertical = (props) => {
 
             <div className={"menu-title"}>MENU</div>
 
-            <Link to='/' className={"item link"}>
+            <NavLink to='/' exact className={"item link"} activeClassName={"active"}>
                 <div className="centered menu-item">Overview</div>
-            </Link>
-            <Link to='/board' className={"item link"}>
+            </NavLink>
+            <NavLink to='/board' exact className={"item link"} activeClassName={"active"}>
                 <div className="centered menu-item">Board</div>
-            </Link>
-            <Link to='/watch-list' className={"item link"}>
+            </NavLink>
+            <NavLink to='/watch-list' exact className={"item link"} activeClassName={"active"}>
                 <div className="centered menu-item">Watch List</div>
-            </Link>
-            <Link to='/insider-trading' className={"item link"}>
+            </NavLink>
+            <NavLink to='/insider-trading' exact className={"item link"} activeClassName={"active"}>
                 <div className="centered menu-item">Insider Trading</div>
-            </Link>
+            </NavLink>
 
 
             <div className={"menu-title"}>SETTINGS</div>

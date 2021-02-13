@@ -1,6 +1,6 @@
 import {Button, Icon, Search} from "semantic-ui-react"
 import React, {useState} from 'react'
-import {Link, useHistory} from "react-router-dom";
+import {Link, NavLink, useHistory} from "react-router-dom";
 
 export const SearchTicker = (props) => {
     const [state, setState] = useState({isLoading: false, results: [{title: '', description: ''}], value: ''});
@@ -78,15 +78,28 @@ export const SearchTicker = (props) => {
             />
 
             {symbols.map(symbol => (
-                <Link key={symbol} to={{pathname: "/company", state: {symbol: symbol}}}>
+                <NavLink key={symbol}
+                         to={{pathname: "/company", state: {symbol: symbol}}}
+                         activeClassName={"active"}
+                         isActive={(match, location) => {
+                             if (!match) {
+                                 return false;
+                             }
 
-                    <Button key={symbol} id={symbol} style={{marginLeft: 30}} size='large'>
+                             if(location.state.symbol === symbol){
+                                 return true;
+                             }
+                         }}
+                >
+
+                    {/*style={{marginLeft: 30, borderStyle: 'solid', borderWidth:'thin', borderColor: '#556ee6', color: '#556ee6', backgroundColor: '#eff2f7'}}*/}
+                    <Button key={symbol} id={symbol} className={"symbol-button"} size='medium'>
                         {symbol}
                         <Icon name='delete' className={"right"} onClick={() => {
                             handleRemoveSymbolButton(symbol)
                         }}/>
                     </Button>
-                </Link>
+                </NavLink>
             ))}
         </div>
     )
