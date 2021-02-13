@@ -24,10 +24,7 @@ export const SearchTicker = (props) => {
 
 
     const handleResultSelect = (e, { result }) => {
-        setSymbol(symbols => {
-            const list = [...symbols, result.title];
-            return list;
-        });
+        setSymbol(symbols => [...symbols, result.title]);
     }
 
     const handleSearchChange = (e, {value}) => {
@@ -39,7 +36,7 @@ export const SearchTicker = (props) => {
             body: JSON.stringify({"symbol": value})
         };
 
-        fetch('/search', requestOptions)
+        fetch('/search-symbol', requestOptions)
             .then(response => response.json())
             .then(data => data.slice(0,5))
             .then(data => {
@@ -58,9 +55,6 @@ export const SearchTicker = (props) => {
     };
 
     const handleRemoveSymbolButton = (symbol) => {
-        console.log(symbols);
-        console.log("Removed symbol " + symbol);
-
         const index = symbols.indexOf(symbol);
         if (index > -1) {
             document.getElementById(symbol).remove()
@@ -93,7 +87,6 @@ export const SearchTicker = (props) => {
                         }}/>
                     </Button>
                 </Link>
-
             ))}
         </div>
     )

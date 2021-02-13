@@ -18,7 +18,7 @@ public class SearchController {
     @Autowired
     SecurityRepository securityRepository;
 
-    @PostMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/search-symbol", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Security>> search(@RequestBody SearchRequest request) {
         System.out.println("symbol " + request.getSymbol());
         var symbols = securityRepository.findBySymbolStartingWithIgnoreCaseOrderBySymbol(request.getSymbol());
