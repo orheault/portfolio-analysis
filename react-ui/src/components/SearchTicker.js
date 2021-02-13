@@ -1,12 +1,12 @@
 import {Button, Icon, Search} from "semantic-ui-react"
 import React, {useState} from 'react'
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 export const SearchTicker = (props) => {
     const [state, setState] = useState({isLoading: false, results: [{title: '', description: ''}], value: ''});
     const {isLoading, value, results} = state
-
     const [symbols, setSymbol] = useState([]);
+    const linkHistory = useHistory();
 
 
     /** DETECT INPUT KEYBOARD AND FOCUS SEARCH BAR. ALLOWS TO SEARCH TICKER WITHOUT HAVING TO FOCUS ON THE SEARCH
@@ -22,9 +22,9 @@ export const SearchTicker = (props) => {
         }
     }, []);
 
-
     const handleResultSelect = (e, { result }) => {
         setSymbol(symbols => [...symbols, result.title]);
+        linkHistory.push("/company" ,{symbol:result.title} );
     }
 
     const handleSearchChange = (e, {value}) => {
@@ -78,7 +78,7 @@ export const SearchTicker = (props) => {
             />
 
             {symbols.map(symbol => (
-                <Link key={symbol} to={{pathname: "/company", query: {symbol: symbol}}}>
+                <Link key={symbol} to={{pathname: "/company", state: {symbol: symbol}}}>
 
                     <Button key={symbol} id={symbol} style={{marginLeft: 30}} size='large'>
                         {symbol}
