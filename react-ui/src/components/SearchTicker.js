@@ -1,9 +1,12 @@
-import {Search} from "semantic-ui-react"
+import {Button, Icon, Search} from "semantic-ui-react"
 import React, {useState} from 'react'
+import {Link} from "react-router-dom";
 
 export const SearchTicker = (props) => {
     const [state, setState] = useState({isLoading: false, results: [{title: '', description: ''}], value: ''});
     const {isLoading, value, results} = state
+
+    const [symbols, setSymbol] = useState([]);
 
 
     /** DETECT INPUT KEYBOARD AND FOCUS SEARCH BAR. ALLOWS TO SEARCH TICKER WITHOUT HAVING TO FOCUS ON THE SEARCH
@@ -20,19 +23,20 @@ export const SearchTicker = (props) => {
     }, []);
 
 
-
-
     const handleResultSelect = (e, { result }) => {
-        setState({ value: result.title })
+        setSymbol(symbols => {
+            const list = [...symbols, result.title];
+            return list;
+        });
     }
 
-    const handleSearchChange = React.useCallback((e, { value }) => {
-        setState({ isLoading: true, value })
+    const handleSearchChange = (e, {value}) => {
+        setState({isLoading: true, value})
 
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ "symbol": value })
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({"symbol": value})
         };
 
         fetch('/search', requestOptions)
@@ -41,8 +45,7 @@ export const SearchTicker = (props) => {
             .then(data => {
                 let results = []
                 data.forEach((security) => {
-                    //console.log(security.symbol + " " + security.description)
-                    let result = { title: security.symbol, description: security.description }
+                    let result = {title: security.symbol, description: security.description}
                     results.push(result);
                 });
 
@@ -52,7 +55,20 @@ export const SearchTicker = (props) => {
                 })
             })
             .catch(console.log)
-    });
+    };
+
+    const handleRemoveSymbolButton = (symbol) => {
+        console.log(symbols);
+        console.log("Removed symbol " + symbol);
+
+        const index = symbols.indexOf(symbol);
+        if (index > -1) {
+            document.getElementById(symbol).remove()
+
+            symbols.splice(index, 1);
+            setSymbol(symbols);
+        }
+    }
 
     return (
         <div className={props.className}>
@@ -66,6 +82,15 @@ export const SearchTicker = (props) => {
                 value={value}
                 placeholder={"Search.."}
             />
+
+            {symbols.map(symbol => (
+                <Button key={symbol} id={symbol} style={{marginLeft: 30}} size='massive'>
+                    <Link to='/'>
+                        {symbol}
+                    </Link>
+                    <Icon name='delete' className={"right"} onClick={()=>{handleRemoveSymbolButton(symbol)}}/>
+                </Button>
+            ))}
         </div>
     )
 }
