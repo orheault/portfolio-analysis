@@ -16,7 +16,7 @@ export const SearchTicker = (props) => {
             document.addEventListener('keypress', event => {
                 if (!node.focused) {
                     node.focus();
-                    node.value = node.value + event.key;
+                    node.value = event.key;
                 }
             })
         }
@@ -84,12 +84,16 @@ export const SearchTicker = (props) => {
             />
 
             {symbols.map(symbol => (
-                <Button key={symbol} id={symbol} style={{marginLeft: 30}} size='massive'>
-                    <Link to='/'>
+                <Link key={symbol} to={{pathname: "/company", query: {symbol: symbol}}}>
+
+                    <Button key={symbol} id={symbol} style={{marginLeft: 30}} size='large'>
                         {symbol}
-                    </Link>
-                    <Icon name='delete' className={"right"} onClick={()=>{handleRemoveSymbolButton(symbol)}}/>
-                </Button>
+                        <Icon name='delete' className={"right"} onClick={() => {
+                            handleRemoveSymbolButton(symbol)
+                        }}/>
+                    </Button>
+                </Link>
+
             ))}
         </div>
     )

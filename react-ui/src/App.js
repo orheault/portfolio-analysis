@@ -11,6 +11,7 @@ import {MainPage} from "./pages/index";
 import {NotFoundPage} from './pages/404';
 import {SideMenuVertical} from "./components/SideMenuVertical";
 import {TopMenu} from "./components/TopMenu";
+import {Company} from "./pages/company";
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         <div style={{paddingTop: 65, height:'100%'}} className="pusher blend-white ">
           <Switch>
             <Route exact path="/" component={MainPage}/>
+            <Route exact path="/company" component={Company} />
             <Route exact path="/404" component={NotFoundPage}/>
             <Redirect to="/404"/>
           </Switch>
