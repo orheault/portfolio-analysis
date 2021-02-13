@@ -1,4 +1,4 @@
-package com.olivier.portfolioanalysis.company;
+package com.olivier.portfolioanalysis.security;
 
 import org.springframework.data.repository.CrudRepository;
 import java.util.List;

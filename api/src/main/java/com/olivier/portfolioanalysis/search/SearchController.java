@@ -1,7 +1,7 @@
 package com.olivier.portfolioanalysis.search;
 
-import com.olivier.portfolioanalysis.company.Security;
-import com.olivier.portfolioanalysis.company.SecurityRepository;
+import com.olivier.portfolioanalysis.security.Security;
+import com.olivier.portfolioanalysis.security.SecurityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

@@ -1,4 +1,4 @@
-package com.olivier.portfolioanalysis.company;
+package com.olivier.portfolioanalysis.security;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

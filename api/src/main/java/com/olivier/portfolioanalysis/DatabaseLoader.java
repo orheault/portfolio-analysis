@@ -1,7 +1,7 @@
 package com.olivier.portfolioanalysis;
 
-import com.olivier.portfolioanalysis.company.Security;
-import com.olivier.portfolioanalysis.company.SecurityRepository;
+import com.olivier.portfolioanalysis.security.Security;
+import com.olivier.portfolioanalysis.security.SecurityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
