@@ -1,5 +1,6 @@
+from .base import Base
 from sqlalchemy import Column, String, Date, Boolean, Integer
-from dao.base import Base
+from sqlalchemy.orm import relationship
 
 
 class InsideTrader(Base):
@@ -13,6 +14,8 @@ class InsideTrader(Base):
     reporting_owner_relationship_is_ten_percent  = Column(Boolean)
     reporting_owner_relationship_is_other= Column(Boolean)
     reporting_owner_relationship_description = Column(String)
+
+    non_derivative_transactions = relationship("NonDerivativeTransaction", back_populates = "inside_trader")
 
     def __init__(self, symbol, reporting_owner_name, transaction_date, reporting_owner_relationship_is_director, reporting_owner_relationship_is_officer, reporting_owner_relationship_is_ten_percent, reporting_owner_relationship_is_other, reporting_owner_relationship_description):
         self.symbol = symbol

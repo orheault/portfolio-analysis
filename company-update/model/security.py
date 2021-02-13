@@ -1,10 +1,11 @@
 from sqlalchemy import Column, String, Date, Boolean, Integer, Float, ForeignKey
-from dao.base import Base
-from dao.base import db
+from .base import Base
 
-class Security(db.Model):
-    id = db.Column(db.String, primary_key=True)
-    description = db.Column(db.String)
+
+class Security(Base):
+    __tablename__ = 'security'
+    symbol = Column(String, primary_key=True)
+    description = Column(String)
 
     def __init__(self, symbol, description):
         self.symbol = symbol

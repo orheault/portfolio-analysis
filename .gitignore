@@ -1,6 +1,14 @@
 .gradle
 .idea
 
+### database ###
+database/dump/
+
+### company-update ###
+company-update/env/
+company-update/.vscode/
+company-update/**/__pycache__
+
 ### api ###
 api/build/
 api/gradle/
