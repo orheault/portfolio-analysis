@@ -85,7 +85,7 @@ export const SearchTicker = (props) => {
             />
 
             {symbols.map(symbol => (
-                <div>
+                <div key={"divbutton"+ symbol}>
                     <NavLink key={symbol}
                              to={{pathname: "/company", state: {symbol: symbol}}}
                              activeClassName={"active"}
@@ -99,12 +99,12 @@ export const SearchTicker = (props) => {
                                  }
                              }}
                     >
-                        <Button key={symbol} id={"button_open" + symbol} className={"symbol-button"} size='medium'>
+                        <Button key={"button"+ symbol} id={"button_open" + symbol} className={"symbol-button"} size='medium'>
                             {symbol}
                         </Button>
                     </NavLink>
 
-                    <Icon name='delete' id={"button_close" + symbol} className={"right"} onClick={() => {
+                    <Icon key={"icon"+ symbol} name='delete' id={"button_close" + symbol} className={"right"} onClick={() => {
                         handleRemoveSymbolButton(symbol)
                     }}/>
                 </div>
@@ -112,16 +112,3 @@ export const SearchTicker = (props) => {
         </div>
     )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
