@@ -1,6 +1,6 @@
 import {Button, Icon, Search} from "semantic-ui-react"
 import React, {useState} from 'react'
-import {Link, NavLink, useHistory} from "react-router-dom";
+import {NavLink, useHistory} from "react-router-dom";
 
 export const SearchTicker = (props) => {
     const [state, setState] = useState({isLoading: false, results: [{title: '', description: ''}], value: ''});
@@ -22,9 +22,9 @@ export const SearchTicker = (props) => {
         }
     }, []);
 
-    const handleResultSelect = (e, { result }) => {
+    const handleResultSelect = (e, {result}) => {
         setSymbol(symbols => [...symbols, result.title]);
-        linkHistory.push("/company" ,{symbol:result.title} );
+        linkHistory.push("/company", {symbol: result.title});
     }
 
     const handleSearchChange = (e, {value}) => {
@@ -38,7 +38,7 @@ export const SearchTicker = (props) => {
 
         fetch('/search-symbol', requestOptions)
             .then(response => response.json())
-            .then(data => data.slice(0,5))
+            .then(data => data.slice(0, 5))
             .then(data => {
                 let results = []
                 data.forEach((security) => {
@@ -57,10 +57,17 @@ export const SearchTicker = (props) => {
     const handleRemoveSymbolButton = (symbol) => {
         const index = symbols.indexOf(symbol);
         if (index > -1) {
-            document.getElementById(symbol).remove()
+            document.getElementById("button_open" + symbol).remove()
+            document.getElementById("button_close" + symbol).remove()
 
             symbols.splice(index, 1);
             setSymbol(symbols);
+
+            if (symbols.length > 0) {
+                linkHistory.push("/company", {symbol: symbols[0]});
+            } else {
+                linkHistory.push("/");
+            }
         }
     }
 
@@ -78,28 +85,29 @@ export const SearchTicker = (props) => {
             />
 
             {symbols.map(symbol => (
-                <NavLink key={symbol}
-                         to={{pathname: "/company", state: {symbol: symbol}}}
-                         activeClassName={"active"}
-                         isActive={(match, location) => {
-                             if (!match) {
-                                 return false;
-                             }
+                <div>
+                    <NavLink key={symbol}
+                             to={{pathname: "/company", state: {symbol: symbol}}}
+                             activeClassName={"active"}
+                             isActive={(match, location) => {
+                                 if (!match) {
+                                     return false;
+                                 }
 
-                             if(location.state.symbol === symbol){
-                                 return true;
-                             }
-                         }}
-                >
+                                 if (location.state.symbol === symbol) {
+                                     return true;
+                                 }
+                             }}
+                    >
+                        <Button key={symbol} id={"button_open" + symbol} className={"symbol-button"} size='medium'>
+                            {symbol}
+                        </Button>
+                    </NavLink>
 
-                    {/*style={{marginLeft: 30, borderStyle: 'solid', borderWidth:'thin', borderColor: '#556ee6', color: '#556ee6', backgroundColor: '#eff2f7'}}*/}
-                    <Button key={symbol} id={symbol} className={"symbol-button"} size='medium'>
-                        {symbol}
-                        <Icon name='delete' className={"right"} onClick={() => {
-                            handleRemoveSymbolButton(symbol)
-                        }}/>
-                    </Button>
-                </NavLink>
+                    <Icon name='delete' id={"button_close" + symbol} className={"right"} onClick={() => {
+                        handleRemoveSymbolButton(symbol)
+                    }}/>
+                </div>
             ))}
         </div>
     )
