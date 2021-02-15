@@ -74,11 +74,16 @@
 /*TOP BAR*/
 .button.symbol-button {
     margin-left: 30px;
-    border-style: solid;
-    border-width: thin;
-    border-color: #556ee6;
+    margin-right: 0;
+    border-left: thin solid #556ee6;
+    border-top: thin solid #556ee6;
+    border-bottom: thin solid #556ee6;
+
     color: #556ee6;
     background-color: #eff2f7;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    height: 38px;
 }
 
 .button.symbol-button:hover{
@@ -95,4 +100,15 @@
 .active .button.symbol-button{
     background-color: #556ee6;
     color: white;
+}
+
+.button.symbol-button-close {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: thin solid #556ee6;
+    border-right: thin solid #556ee6;
+    border-top: thin solid #556ee6;
+    border-bottom: thin solid #556ee6;
+    height: 38px;
+    background-color:#eff2f7;
 }

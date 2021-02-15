@@ -104,9 +104,10 @@ export const SearchTicker = (props) => {
                         </Button>
                     </NavLink>
 
-                    <Icon key={"icon"+ symbol} name='delete' id={"button_close" + symbol} className={"right"} onClick={() => {
-                        handleRemoveSymbolButton(symbol)
-                    }}/>
+                    <Button  key={"icon"+ symbol} id={"button_close" + symbol} icon={"delete"}
+                             className={"right symbol-button-close"} size='medium'
+                             onClick={() => {handleRemoveSymbolButton(symbol)}}>
+                    </Button>
                 </div>
             ))}
         </div>
