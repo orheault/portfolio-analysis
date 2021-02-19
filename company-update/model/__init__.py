@@ -4,4 +4,5 @@ __all__ = ["Base", "db"]
 from .inside_trader import InsideTrader
 from .non_derivative_transaction import NonDerivativeTransaction
 from .security_type import SecurityType
-from .security import Security
+from .company_security import CompanySecurity
+from .company import Company

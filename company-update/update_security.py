@@ -4,9 +4,10 @@
 
 from ftplib import FTP
 from model.base import Session
-from model.security import Security
+from model.company_security import CompanySecurity
 from security_formatter import SecurityFormatter
 from sqlalchemy.dialects.postgresql import insert
+from tqdm import tqdm
 
 class SecurityUpdater:
     def __init__(self):
@@ -19,11 +20,15 @@ class SecurityUpdater:
         ftp.retrlines('RETR ' + url, self._securityFormatter) #__split_row
 
     def execute(self):
+        print("Download symbol from nasdaq listed")
         self.__download_file_content('/symboldirectory/nasdaqlisted.txt')
+        print("Insert securities")
         self.__insert_securities(self._securityFormatter.rows)
         self._securityFormatter.rows.clear()
 
+        print("Download symbol from nasdaq other listed")
         self.__download_file_content('/symboldirectory/otherlisted.txt')
+        print("Insert securities")
         self.__insert_securities(self._securityFormatter.rows)
 
         self._session.close()
@@ -33,12 +38,12 @@ class SecurityUpdater:
         del rows[0]
         del rows[len(rows)-1]
 
-        for row in rows:
+        for row in tqdm(rows):
             symbol = row[0]
             description = row[1]
-            # todo: insert symbol and description into database
-            security = Security(symbol, description)
-            insert_statement = insert(Security).values({Security.symbol:symbol, Security.description: description})
+            
+            security = CompanySecurity(symbol, description)
+            insert_statement = insert(CompanySecurity).values({CompanySecurity.symbol:symbol, CompanySecurity.description: description})
             self._session.execute(insert_statement.on_conflict_do_nothing())
         
         self._session.commit()

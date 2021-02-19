@@ -12,6 +12,7 @@ from sqlalchemy.orm import Query
 
 import shutil
 import os
+import time
 
 class InsideTraderUpdater:
     def __init__(self):
@@ -44,27 +45,6 @@ class InsideTraderUpdater:
                         self.session.commit()
 
                     non_derivative_transactions.append(NonDerivativeTransaction(int(float(amount_share)),price_per_share,transaction_code,security_type))
-
-
-
-
-        # non_derivative_transactions_node = form.getElementsByTagName('nonDerivativeTable')[0].getElementsByTagName('nonDerivativeTransaction')
-        # for non_derivative_transaction in non_derivative_transactions_node:
-        #     transaction_code = non_derivative_transaction.getElementsByTagName('transactionCoding')[0].getElementsByTagName('transactionCode')[0].firstChild.data
-
-        #     amount_share = non_derivative_transaction.getElementsByTagName('transactionAmounts')[0].getElementsByTagName('transactionShares')[0].getElementsByTagName('value')[0].firstChild.data
-            
-        #     price_per_share = 0
-        #     if transaction_code != 'M':
-        #         price_per_share = non_derivative_transaction.getElementsByTagName('transactionAmounts')[0].getElementsByTagName('transactionPricePerShare')[0].getElementsByTagName('value')[0].firstChild.data
-
-            
-        #     security_title = self.get_first_child_data(form, 'securityTitle')
-        #     query_security_type = Query(SecurityType, self.session)
-        #     query_security_type.filter(SecurityType.title == security_title)
-        #     security_type = query_security_type.first()
-
-        #     non_derivative_transactions.append(NonDerivativeTransaction(int(float(amount_share)),price_per_share,transaction_code,security_type))
 
         return non_derivative_transactions
 
@@ -111,7 +91,8 @@ class InsideTraderUpdater:
         for security in securities:
             # Download form 4 in sec-edgar-filings folder
             dl = Downloader()
-            ret = dl.get("4", security.symbol, after="2021-02-11") # str(datetime.now().date())
+            # todo: Get latest downloaded form 4 date from the database and pass the date as paramenter to the dl.get function ...
+            ret = dl.get("4", security.symbol, after=str(datetime.now().date())
 
             base_path = os.path.abspath('sec-edgar-filings/'+security.symbol+'/4/')
             path = Path(base_path)
@@ -130,6 +111,7 @@ class InsideTraderUpdater:
                 self.session.commit()
 
             shutil.rmtree(edgar_path, ignore_errors=True)
+            time.sleep(1)
                     
         self.session.close()
 
