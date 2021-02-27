@@ -35,11 +35,10 @@ class CadSecurityUpdater():
 
         for security in securities:
             existing_security = self._session.query(Security.symbol == security.symbol).filter(Security.exchange_id == exchange_id).first()
-            if existing_security is not None and len(existing_security) > 0:
+            if existing_security is None:
                 insert_statement = insert(Security).values({Security.symbol:security.symbol, Security.description: security.description, Security.exchange_id: exchange_id, Security.security_type_id: security_type_id})
                 self._session.execute(insert_statement.on_conflict_do_nothing())
-        
-        self._session.commit()
+                self._session.commit()
 
     def execute(self):
         symbol_array = self.__download_tsx_json()
@@ -54,4 +53,4 @@ class CadSecurityUpdater():
 
             self.__update_security(securities, Exchange.EXCHANGE_TSX_ID, security_type_id)
             
-CadSecurityUpdater().execute()
+#CadSecurityUpdater().execute()

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "28a5e5a21f94df687a420001f5fd7b3712117f1535a6010041198b47b078a0e5"
+            "sha256": "cb553d5650e2a620a6898425af05bcf60e93c9d8c885838b4dd952fb1cd4f042"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -165,6 +165,14 @@
                 "sha256:eb10ce3e7736052ed3623d49975ce333bcd712c7bb19a58b9e2089d4057d0798"
             ],
             "version": "==2021.1"
+        },
+        "questrade-api": {
+            "hashes": [
+                "sha256:aeca5c459c42b48923684bbd42c3738aad3023728d7b793a598de8890802b109",
+                "sha256:c73d3b0a12b50c61572a09fa2e1ab00d5d5a99fd94af3babd49e97da49913969"
+            ],
+            "index": "pypi",
+            "version": "==1.0.3"
         },
         "requests": {
             "hashes": [
