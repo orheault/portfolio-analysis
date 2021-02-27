@@ -7,13 +7,17 @@ from sqlalchemy.orm import relationship
 class Company(Base):
     __tablename__ = 'company'
     id = Column(Integer, primary_key=True)
-    cik = Column(Numeric)
     description = Column(String)
+    name = Column(String)
     is_active = Column(Boolean)
+    sector_id = Column(Integer)
+    industry_id = Column(Integer)
     
-    company_securities = relationship("CompanySecurity", back_populates="company")
+    securities = relationship("Security", back_populates="company")
 
-    def __init__(self, cik, description = "", is_active = True):
-        self.cik = cik
+    def __init__(self, description = "", is_active = True, name="", industry_id=1, sector_id=1):
         self.description = description
         self.is_active = is_active
+        self.name = name
+        self.industry_id = industry_id
+        self.sector_id = sector_id

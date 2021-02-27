@@ -14,7 +14,7 @@ import time
 import re
 
 
-class CompanyCreater:
+class SecCikCreator:
     def __init__(self):
         self.session = Session()
         self.dl = Downloader()
@@ -90,6 +90,15 @@ class CompanyCreater:
     def __create_company(self, cik):
         print("Create company for: " + str(cik))
         company = Company(cik)
+
+        # TODO: 
+        import yfinance as yf
+        msft = yf.Ticker("SU")
+
+        # get stock info
+        msft.info
+        print( msft.info)
+        
         self.session.add(company)
         self.session.commit()
 
@@ -102,7 +111,6 @@ class CompanyCreater:
         
     '''
     def execute(self):
-        
         securities = self.session.query(CompanySecurity).filter(CompanySecurity.company_id==None).filter(CompanySecurity.is_active==None).all()
         for security in tqdm(securities):
             symbol = ''
@@ -130,7 +138,7 @@ class CompanyCreater:
 
 
 
-CompanyCreater().execute()
+#CompanyCreater().execute()
 
 # session = Session()
 # for security in session.query(Security).all():

@@ -87,6 +87,7 @@ class InsideTraderUpdater:
         shutil.rmtree(edgar_path, ignore_errors=True)
 
         # Retrieve inside trader form.
+        # TODO: query only United State securities
         securities = self.session.query(Security).all()
         for security in securities:
             # Download form 4 in sec-edgar-filings folder
