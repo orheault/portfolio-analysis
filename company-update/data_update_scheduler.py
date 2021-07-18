@@ -6,14 +6,15 @@ from datetime import datetime
 import schedule
 import time
 
+
 def daily_update():
-    print(str(datetime.now()) + ": Update us securities")
+    _print(": Update us securities")
     UsSecurityUpdater().execute()
 
-    print(str(datetime.now()) + ": Update canadian securities")
+    _print(": Update canadian securities")
     CadSecurityUpdater().execute()
 
-    print(str(datetime.now()) + ": Create new companies based on securities")
+    _print(": Create new companies based on securities")
     InvestingCompanyCreater().execute()
 
     # TODO: print(datetime.now() + ": Create new companies based on securities")
@@ -23,7 +24,14 @@ def daily_update():
     # print(datetime.now() + ": Update insider trade data")
     # InsideTraderUpdater().execute()
 
-def start():                                                                                                                                                                      
+    _print(": Update candles stock's security with investpy")
+
+
+def _print(self, text):
+    print(str(datetime.now()) + text)
+
+
+def start():
     schedule.every().day.at("16:30").do(daily_update)
 
     while True:

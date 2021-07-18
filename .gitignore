@@ -4,6 +4,9 @@
 ### database ###
 database/dump/
 
+## Python environment ##
+/venv
+
 ### company-update ###
 company-update/env/
 company-update/.vscode/
@@ -15,3 +18,4 @@ api/gradle/
 
 ### REACT-UI PROJECT ###
 react-ui/node_modules/
+
